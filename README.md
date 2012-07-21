@@ -15,6 +15,7 @@ See Also
 ===
 
   * <http://www.sqlite.org/cvstrac/wiki?p=LoadableExtensions>
+  * <http://www.mail-archive.com/sqlite-users@sqlite.org/msg71730.html>
   * <http://www.sqlite.org/c3ref/create_function.html>
   * <http://www.sqlite.org/fts3.html#appendix_a>
   * <http://www.sqlite.org/c3ref/load_extension.html>
