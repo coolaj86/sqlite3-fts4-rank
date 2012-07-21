@@ -56,9 +56,8 @@ static void rankfunc(sqlite3_context *pCtx, int nVal, sqlite3_value **apVal){
   aMatchinfo = (unsigned int *)sqlite3_value_blob(apVal[0]);
   nPhrase = aMatchinfo[0];
   nCol = aMatchinfo[1];
-  weight = sqlite3_value_double(apVal[1]);
-  if (0.0 == weight) {
-    weight = 1.0;
+  if (2 == nVal) {
+    weight = sqlite3_value_double(apVal[1]);
   }
 
 
