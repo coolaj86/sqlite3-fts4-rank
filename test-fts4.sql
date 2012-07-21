@@ -3,8 +3,8 @@
 -- This example (and all others in this section) assumes the following schema
 CREATE VIRTUAL TABLE documents USING fts4(title, content);
 
-INSERT INTO mail VALUES('hello world', 'This message is a hello world message.');
-INSERT INTO mail VALUES('urgent: serious', 'This mail is seen as a more serious mail');
+INSERT INTO documents VALUES('hello world', 'This message is a hello world message.');
+INSERT INTO documents VALUES('urgent: serious', 'This mail is seen as a more serious mail');
 
 SELECT title FROM documents WHERE documents MATCH 'effect* known';
 
