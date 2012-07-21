@@ -37,7 +37,7 @@ SQLITE_EXTENSION_INIT1
 **     ORDER BY rank(matchinfo(documents), 1.0, 0.5) DESC
 */
 static void rankfunc(sqlite3_context *pCtx, int nVal, sqlite3_value **apVal){
-  int *aMatchinfo;                /* Return value of matchinfo() */
+  unsigned int *aMatchinfo;       /* Return value of matchinfo() */
   int nCol;                       /* Number of columns in the table */
   int nPhrase;                    /* Number of phrases in the query */
   int iPhrase;                    /* Current phrase */
@@ -75,7 +75,7 @@ static void rankfunc(sqlite3_context *pCtx, int nVal, sqlite3_value **apVal){
     ** the hit count and global hit counts for each column are found in 
     ** aPhraseinfo[iCol*3] and aPhraseinfo[iCol*3+1], respectively.
     */
-    int *aPhraseinfo = &aMatchinfo[2 + iPhrase*nCol*3];
+    unsigned int *aPhraseinfo = &aMatchinfo[2 + iPhrase*nCol*3];
     for(iCol=0; iCol<nCol; iCol++){
       int nHitCount = aPhraseinfo[3*iCol];
       int nGlobalHitCount = aPhraseinfo[3*iCol+1];

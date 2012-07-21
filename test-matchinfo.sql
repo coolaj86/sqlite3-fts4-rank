@@ -25,7 +25,8 @@ INSERT INTO t1 VALUES('single request', 'default data');
 -- 1 rows).
 --
 SELECT matchinfo(t1) FROM t1 WHERE t1 MATCH 'default transaction "these semantics"';
--- In order to see the result as a non-blob, hex() must be used
+
+-- the blob appears as an empty string. To view an ascii representation, use hex()
 SELECT hex(matchinfo(t1)) FROM t1 WHERE t1 MATCH 'default transaction "these semantics"';
 
 -- The format string for this query is "ns". The output array will therefore
@@ -39,5 +40,6 @@ SELECT hex(matchinfo(t1)) FROM t1 WHERE t1 MATCH 'default transaction "these sem
 -- number of rows in the table). The following two values are the lengths 
 -- of the longest common subsequence of phrase matches in each column.
 SELECT matchinfo(t1, 'ns') FROM t1 WHERE t1 MATCH 'default transaction';
--- In order to see the result as a non-blob, hex() must be used
+
+-- the blob appears as an empty string. To view an ascii representation, use hex()
 SELECT hex(matchinfo(t1, 'ns') FROM t1 WHERE t1 MATCH 'default transaction';

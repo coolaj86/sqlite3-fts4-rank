@@ -2,11 +2,11 @@ all: linux
 	#Linux
 
 linux:
-	gcc -shared -fPIC -Isqlite3 -o fts4-rank.sqlext fts4-rank.c
+	gcc -Wall -Werror -shared -fPIC -Isqlite3 -o fts4-rank.sqlext fts4-rank.c
 	#Using GCC on Mac OSX
 
 darwin:
-	gcc -bundle -fPIC -Isqlite3 -o fts4-rank.sqlext fts4-rank.c
+	gcc -Wall -Werror -bundle -fPIC -Isqlite3 -o fts4-rank.sqlext fts4-rank.c
 
 win32:
 	#Microsoft Tools on Windows
