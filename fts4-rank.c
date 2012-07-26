@@ -42,7 +42,7 @@ static void rankfunc(sqlite3_context *pCtx, int nVal, sqlite3_value **apVal){
   int nPhrase;                    /* Number of phrases in the query */
   int iPhrase;                    /* Current phrase */
   double score = 0.0;             /* Value to return */
-  double weight = 1.0;
+  double defaultWeight = 1.0;
 
   assert( sizeof(int)==4 );
 
@@ -52,13 +52,10 @@ static void rankfunc(sqlite3_context *pCtx, int nVal, sqlite3_value **apVal){
   ** nPhrase to contain the number of reportable phrases in the users full-text
   ** query, and nCol to the number of columns in the table.
   */
-  if( nVal<1 || nVal>2) goto wrong_number_args;
   aMatchinfo = (unsigned int *)sqlite3_value_blob(apVal[0]);
   nPhrase = aMatchinfo[0];
   nCol = aMatchinfo[1];
-  if (2 == nVal) {
-    weight = sqlite3_value_double(apVal[1]);
-  }
+  if ( (nVal - 1) > nCol ) goto wrong_number_args;
 
 
   /* Iterate through each phrase in the users query. */
@@ -78,6 +75,8 @@ static void rankfunc(sqlite3_context *pCtx, int nVal, sqlite3_value **apVal){
     for(iCol=0; iCol<nCol; iCol++){
       int nHitCount = aPhraseinfo[3*iCol];
       int nGlobalHitCount = aPhraseinfo[3*iCol+1];
+      double weight = defaultWeight;
+      if ( (1 + iCol) < nVal ) weight = sqlite3_value_double(apVal[1 + iCol]);
       if( nHitCount>0 ){
         score += ((double)nHitCount / (double)nGlobalHitCount) * weight;
       }
